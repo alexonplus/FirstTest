@@ -1,29 +1,16 @@
-name: .NET Core CI
+name: .NET CI
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: windows-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
-
-    - name: Restore dependencies
-      run: dotnet restore **/*.sln
-
-    - name: Build
-      run: dotnet build **/*.sln --no-restore
-
-    - name: Run Tests
-      run: dotnet test **/*.sln --no-build --verbosity normal
+    - name: Test
+      run: dotnet test **/*.sln
