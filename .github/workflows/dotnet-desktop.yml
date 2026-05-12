@@ -3,19 +3,23 @@ name: .NET CI
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
 
-    - name: Test
+    - name: Run Tests
+      # i hate git hub action 
       
-      run: dotnet test TestTestTest.sln --verbosity normal
+      run: dotnet test "xUnit Test Project/xUnit Test Project.csproj" --verbosity normal
