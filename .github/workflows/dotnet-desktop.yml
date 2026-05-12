@@ -7,10 +7,15 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-dotnet@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
+
     - name: Test
-      run: dotnet test **/*.sln
+      
+      run: dotnet test TestTestTest.sln --verbosity normal
